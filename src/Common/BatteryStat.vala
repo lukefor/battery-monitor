@@ -92,15 +92,15 @@ public class BatteryStat : GLib.Object{
 	}
 	
 	public double voltage(){
-		return (voltage_now / 1000000.00);
+		return (voltage_now / 1000.00);
 	}
 
 	public double charge_percent(){
-		return (((charge_now * 1.00) / batt_charge_full()) * 100);
+		return (((charge_now * 1.00) / batt_charge_full()) * 100.00);
 	}
 
 	public double charge_in_mah(){
-		return (charge_now / 1000.0);
+		return (charge_now / 100.00) * 4220.00;
 	}
 
 	public double charge_in_wh(){
@@ -112,7 +112,7 @@ public class BatteryStat : GLib.Object{
 	}
 
 	public static double batt_charge_percent(){
-		return (((batt_charge_now() * 1.00) / batt_charge_full()) * 100);
+		return (((batt_charge_now() * 1.00) / batt_charge_full()) * 100.00);
 	}
 	
 	public static long batt_charge_now(){
@@ -144,7 +144,7 @@ public class BatteryStat : GLib.Object{
 
 	public static long batt_voltage_now(){
 		string val = read_sys_stat_file(BATT_STATS_VOLTAGE_NOW);
-		if (val.length == 0) { return 0; }
+		if (val.length == 0) { return 4000; }
 		return long.parse(val);
 	}
 
