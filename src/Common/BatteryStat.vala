@@ -96,7 +96,7 @@ public class BatteryStat : GLib.Object{
 	}
 
 	public double charge_percent(){
-		return (((charge_now * 1.00) / batt_charge_full()) * 100.00);
+		return (((charge_now * 1.00) / (1.00 * batt_charge_full())) * 100.00);
 	}
 
 	public double charge_in_mah(){
