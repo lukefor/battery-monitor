@@ -44,11 +44,11 @@ public class BatteryStat : GLib.Object{
 
 	public long graph_x = 0;
 
-	public const string BATT_STATS_CHARGE_NOW         = "/sys/class/power_supply/BAT0/charge_now";
-	public const string BATT_STATS_CHARGE_FULL        = "/sys/class/power_supply/BAT0/charge_full";
-	public const string BATT_STATS_CHARGE_FULL_DESIGN = "/sys/class/power_supply/BAT0/charge_full_design";
-	public const string BATT_STATS_VOLTAGE_NOW        = "/sys/class/power_supply/BAT0/voltage_now";
-	public const string BATT_STATS_STATUS             = "/sys/class/power_supply/BAT0/status";
+	public const string BATT_STATS_CHARGE_NOW         = "/sys/class/power_supply/battery/capacity";
+	public const string BATT_STATS_CHARGE_FULL        = "/sys/class/power_supply/battery/charge_full";
+	public const string BATT_STATS_CHARGE_FULL_DESIGN = "/sys/class/power_supply/battery/charge_full_design";
+	public const string BATT_STATS_VOLTAGE_NOW        = "/sys/class/power_supply/battery/InstatVolt";
+	public const string BATT_STATS_STATUS             = "/sys/class/power_supply/battery/status";
 
 	public BatteryStat.read_from_sys(){
 		this.date = new DateTime.now_local();
@@ -123,13 +123,13 @@ public class BatteryStat : GLib.Object{
 
 	public static long batt_charge_full(){
 		string val = read_sys_stat_file(BATT_STATS_CHARGE_FULL);
-		if (val.length == 0) { return 0; }
+		if (val.length == 0) { return 100; }
 		return long.parse(val);
 	}
 
 	public static long batt_charge_full_design(){
 		string val = read_sys_stat_file(BATT_STATS_CHARGE_FULL_DESIGN);
-		if (val.length == 0) { return 0; }
+		if (val.length == 0) { return 100; }
 		return long.parse(val);
 	}
 
